@@ -18,6 +18,8 @@ class MinesweeperGame
   def play
     until @board.won? || @board.lost?
       puts @board.render
+      puts "Action choices: explore(e), flag(f) save(s)"
+      puts "Action,row,column"
 
       action, pos = get_move
       perform_move(action, pos)
