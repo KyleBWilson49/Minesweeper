@@ -17,12 +17,20 @@ class Board
   end
 
   def render(reveal = false)
+    system('clear')
+    # debugger
     # reveal is used to fully reveal the board at game end
-    @grid.map do |row|
-      row.map do |tile|
-        reveal ? tile.reveal : tile.render
-      end.join("")
-    end.join("\n")
+    @grid.each_index { |index| print "   #{index}" }
+    print "\n"
+    @grid.each_with_index do |row, index|
+      row_string = "#{index}"
+      row.each do |tile|
+        char = reveal ? tile.reveal : tile.render
+        row_string << "  " << char << " "
+      end
+      puts row_string
+    end
+    return nil
   end
 
   def reveal

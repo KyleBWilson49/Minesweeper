@@ -1,6 +1,7 @@
 require_relative 'tile'
 require_relative 'board'
 require 'yaml'
+require 'byebug'
 
 class MinesweeperGame
   LAYOUTS = {
