@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Tile
   DELTAS = [
     [-1, -1],
@@ -77,9 +79,9 @@ class Tile
 
   def render
     if flagged?
-      "F"
+      "F".colorize(:light_green)
     elsif explored?
-      adjacent_bomb_count == 0 ? "_" : adjacent_bomb_count.to_s
+      adjacent_bomb_count == 0 ? "_" : colorize(adjacent_bomb_count)
     else
       "*"
     end
@@ -89,12 +91,23 @@ class Tile
     # used to fully reveal the board at game end
     if flagged?
       # mark true and false flags
-      bombed? ? "F" : "f"
+      bombed? ? "F".colorize(:light_green) : "f".colorize(:light_green)
     elsif bombed?
       # display a hit bomb as an X
-      explored? ? "X" : "B"
+      explored? ? "X".colorize(:red) : "B".colorize(:red)
     else
-      adjacent_bomb_count == 0 ? "_" : adjacent_bomb_count.to_s
+      adjacent_bomb_count == 0 ? "_" : colorize(adjacent_bomb_count)
+    end
+  end
+
+  def colorize(num)
+    case num
+    when 0
+      num.to_s.colorize(:blue)
+    when 1
+      num.to_s.colorize(:green)
+    else
+      num.to_s.colorize(:light_blue)
     end
   end
 
